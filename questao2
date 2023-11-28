@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int meses;
+    double aporte, taxa, valor_total;
+
+   
+    scanf("%d %lf %lf", &meses, &aporte, &taxa);
+
+    
+    for (int i = 1; i <= meses; i++) {
+        
+        valor_total = aporte * pow(1 + taxa, i) * ((pow(1 + taxa, meses) - 1) / taxa);
+
+       
+        printf("Ao fim do mes %d, o montante acumulado sera: %.2lf\n", i, valor_total);
+    }
+
+    return 0;
+}

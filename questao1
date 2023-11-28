@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <string.h>
+
+
+int romanToDecimal(char *roman) {
+    int decimal = 0;
+    int i;
+
+    for (i = 0; i < strlen(roman); i++) {
+        switch (roman[i]) {
+            case 'I':
+                if (roman[i + 1] == 'V' || roman[i + 1] == 'X') {
+                    decimal -= 1;
+                } else {
+                    decimal += 1;
+                }
+                break;
+            case 'V':
+                decimal += 5;
+                break;
+            case 'X':
+                if (roman[i + 1] == 'L' || roman[i + 1] == 'C') {
+                    decimal -= 10;
+                } else {
+                    decimal += 10;
+                }
+                break;
+            case 'L':
+                decimal += 50;
+                break;
+            case 'C':
+                if (roman[i + 1] == 'D' || roman[i + 1] == 'M') {
+                    decimal -= 100;
+                } else {
+                    decimal += 100;
+                }
+                break;
+            case 'D':
+                decimal += 500;
+                break;
+            case 'M':
+                decimal += 1000;
+                break;
+        }
+    }
+
+    return decimal;
+}
+
+
+void decimalToBinary(int decimal) {
+    int binary[32];
+    int i = 0;
+
+    
+    while (decimal > 0) {
+        binary[i] = decimal % 2;
+        decimal = decimal / 2;
+        i++;
+    }
+
+    
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d", binary[j]);
+    }
+    printf("\n");
+}
+
+int main() {
+    char roman[13];
+
+    
+    scanf("%s", roman);
+
+    
+    int decimal = romanToDecimal(roman);
+
+    
+    decimalToBinary(decimal);
+
+    
+    printf("%d\n", decimal);
+
+    
+    printf("%X\n", decimal);
+
+    return 0;
+}
